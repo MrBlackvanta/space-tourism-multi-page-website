@@ -9,9 +9,77 @@
   --font-sans: var(--font-barlow), ui-sans-serif, system-ui, sans-serif;
   --font-condensed:
     var(--font-barlow-condensed), ui-sans-serif, system-ui, sans-serif;
+
+  --color-night: #0b0d17;
+  --color-muted: #d0d6f9;
+
+  --text-preset-1: 9rem;
+  --text-preset-1--line-height: 1.15;
+  --text-preset-1-mobile: 5rem;
+  --text-preset-1-mobile--line-height: 1.15;
+
+  --text-preset-2: 6rem;
+  --text-preset-2--line-height: 1.15;
+  --text-preset-2-tablet: 5rem;
+  --text-preset-2-tablet--line-height: 1.15;
+  --text-preset-2-mobile: 3.5rem;
+  --text-preset-2-mobile--line-height: 1.15;
+
+  --text-preset-3: 3.5rem;
+  --text-preset-3--line-height: 1.15;
+  --text-preset-3-tablet: 2.5rem;
+  --text-preset-3-tablet--line-height: 1.15;
+  --text-preset-3-mobile: 1.5rem;
+  --text-preset-3-mobile--line-height: 1.15;
+
+  --text-preset-4: 2rem;
+  --text-preset-4--line-height: 1.15;
+  --text-preset-4-tablet: 1.5rem;
+  --text-preset-4-tablet--line-height: 1.15;
+  --text-preset-4-mobile: 1.125rem;
+  --text-preset-4-mobile--line-height: 1.15;
+
+  --text-preset-5: 1.75rem;
+  --text-preset-5--line-height: 1.2;
+  --text-preset-5--letter-spacing: 0.15em;
+  --text-preset-5-tablet: 1.25rem;
+  --text-preset-5-tablet--line-height: 1.2;
+  --text-preset-5-tablet--letter-spacing: 0.15em;
+  --text-preset-5-mobile: 1rem;
+  --text-preset-5-mobile--line-height: 1.2;
+  --text-preset-5-mobile--letter-spacing: 0.15em;
+
+  --text-preset-6: 1.75rem;
+  --text-preset-6--line-height: 1.15;
+
+  --text-preset-7: 0.875rem;
+  --text-preset-7--line-height: 1.2;
+  --text-preset-7--letter-spacing: 0.15em;
+
+  --text-preset-8: 1rem;
+  --text-preset-8--line-height: 1.2;
+  --text-preset-8--letter-spacing: 0.15em;
+  --text-preset-8-mobile: 0.875rem;
+  --text-preset-8-mobile--line-height: 1.2;
+  --text-preset-8-mobile--letter-spacing: 0.15em;
+
+  --text-preset-9: 1.125rem;
+  --text-preset-9--line-height: 1.8;
+  --text-preset-9-tablet: 1rem;
+  --text-preset-9-tablet--line-height: 1.8;
+  --text-preset-9-mobile: 0.9375rem;
+  --text-preset-9-mobile--line-height: 1.8;
 }
 
 @layer base {
+  html {
+    @apply overflow-y-scroll scheme-dark;
+  }
+
+  body {
+    @apply bg-night text-white;
+  }
+
   button:not(:disabled) {
     @apply cursor-pointer;
   }

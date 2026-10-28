@@ -4,8 +4,8 @@ My solution to the [Space tourism multi-page website](https://www.frontendmentor
 
 ![](./screenshot.webp)
 
-- Live: https://space-tourism-website.abdelrhman-ahmed8881.workers.dev
-- Code: https://github.com/MrBlackvanta/space-tourism-website
+- Live: https://space-tourism-multi-page-website.abdelrhman-ahmed8881.workers.dev
+- Code: https://github.com/MrBlackvanta/space-tourism-multi-page-website
 
 ## Built with
 
