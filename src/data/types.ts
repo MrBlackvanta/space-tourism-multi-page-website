@@ -13,3 +13,11 @@ export type CrewMember = {
   bio: string;
   portrait: StaticImageData;
 };
+
+export type Destination = {
+  name: string;
+  description: string;
+  distance: string;
+  travelTime: string;
+  image: StaticImageData;
+};

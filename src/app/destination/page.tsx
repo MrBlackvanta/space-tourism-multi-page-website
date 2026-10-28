@@ -1,5 +1,6 @@
-import { PageBackground } from "@/components/layout";
+import { InteriorPage, PageBackground } from "@/components/layout";
 import { pageMetadata } from "@/lib";
+import { DestinationPicker } from "@/views/destination";
 
 const title = "Pick your destination";
 
@@ -14,7 +15,9 @@ export default function Destination() {
   return (
     <>
       <PageBackground page="destination" />
-      <h1>{title}</h1>
+      <InteriorPage number="01" title={title}>
+        <DestinationPicker />
+      </InteriorPage>
     </>
   );
 }
