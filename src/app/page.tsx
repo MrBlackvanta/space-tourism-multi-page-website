@@ -1,6 +1,7 @@
 import { PageBackground } from "@/components/layout";
 import { SITE_NAME } from "@/data";
 import { openGraphBase } from "@/lib";
+import { Hero } from "@/views/home";
 import type { Metadata } from "next";
 
 const title = `${SITE_NAME} | Travel beyond Earth`;
@@ -18,7 +19,7 @@ export default function Home() {
   return (
     <>
       <PageBackground page="home" />
-      <h1>{SITE_NAME}</h1>
+      <Hero />
     </>
   );
 }
