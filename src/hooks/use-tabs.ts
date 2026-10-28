@@ -1,20 +1,41 @@
 import { type KeyboardEvent, useId, useState } from "react";
 
-const keyTargets: Record<string, (current: number, last: number) => number> = {
-  ArrowLeft: (current, last) => (current === 0 ? last : current - 1),
-  ArrowRight: (current, last) => (current === last ? 0 : current + 1),
-  Home: () => 0,
-  End: (_, last) => last,
+type Orientation = "horizontal" | "vertical";
+type KeyTarget = (current: number, last: number) => number;
+
+const toPrevious: KeyTarget = (current, last) =>
+  current === 0 ? last : current - 1;
+const toNext: KeyTarget = (current, last) =>
+  current === last ? 0 : current + 1;
+const toFirst: KeyTarget = () => 0;
+const toLast: KeyTarget = (_, last) => last;
+
+const keyTargets: Record<Orientation, Record<string, KeyTarget>> = {
+  horizontal: {
+    ArrowLeft: toPrevious,
+    ArrowRight: toNext,
+    Home: toFirst,
+    End: toLast,
+  },
+  vertical: {
+    ArrowUp: toPrevious,
+    ArrowDown: toNext,
+    Home: toFirst,
+    End: toLast,
+  },
 };
 
-export function useTabs(count: number) {
+export function useTabs(
+  count: number,
+  orientation: Orientation = "horizontal",
+) {
   const id = useId();
   const [selected, setSelected] = useState(0);
   const tabId = (index: number) => `${id}tab-${index}`;
   const panelId = `${id}panel`;
 
   function onKeyDown(event: KeyboardEvent) {
-    const target = keyTargets[event.key];
+    const target = keyTargets[orientation][event.key];
     if (!target) return;
 
     event.preventDefault();
@@ -25,7 +46,11 @@ export function useTabs(count: number) {
 
   return {
     selected,
-    tabListProps: { role: "tablist", onKeyDown },
+    tabListProps: {
+      role: "tablist",
+      "aria-orientation": orientation,
+      onKeyDown,
+    },
     tabProps: (index: number) => ({
       id: tabId(index),
       role: "tab",

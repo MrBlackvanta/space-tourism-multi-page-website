@@ -21,3 +21,9 @@ export type Destination = {
   travelTime: string;
   image: StaticImageData;
 };
+
+export type Technology = {
+  name: string;
+  description: string;
+  images: Record<"landscape" | "portrait", StaticImageData>;
+};

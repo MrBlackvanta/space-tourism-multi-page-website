@@ -1,5 +1,6 @@
-import { PageBackground } from "@/components/layout";
+import { InteriorPage, PageBackground } from "@/components/layout";
 import { pageMetadata } from "@/lib";
+import { TechnologyPicker } from "@/views/technology";
 
 const title = "Space launch 101";
 
@@ -14,7 +15,9 @@ export default function Technology() {
   return (
     <>
       <PageBackground page="technology" />
-      <h1>{title}</h1>
+      <InteriorPage number="03" title={title}>
+        <TechnologyPicker />
+      </InteriorPage>
     </>
   );
 }
