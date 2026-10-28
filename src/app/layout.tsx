@@ -1,4 +1,4 @@
-import { Signature } from "@/components/layout";
+import { Signature, SiteHeader } from "@/components/layout";
 import { SITE_NAME, SITE_URL } from "@/data";
 import { openGraphBase, twitterBase } from "@/lib";
 import type { Metadata, Viewport } from "next";
@@ -48,8 +48,9 @@ export default function RootLayout({
       lang="en"
       className={`${bellefair.variable} ${barlow.variable} ${barlowCondensed.variable} antialiased`}
     >
-      <body className="relative min-h-dvh">
-        {children}
+      <body className="relative isolate grid min-h-dvh grid-rows-[auto_1fr]">
+        <SiteHeader />
+        <main className="grid">{children}</main>
         <Signature />
       </body>
     </html>

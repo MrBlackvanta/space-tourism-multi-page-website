@@ -19,3 +19,27 @@ export const twitterBase = {
   card: "summary_large_image",
   images: [shareImage],
 } satisfies Metadata["twitter"];
+
+type PageDetails = {
+  title: string;
+  description: string;
+  path: string;
+};
+
+export function pageMetadata({
+  title,
+  description,
+  path,
+}: PageDetails): Metadata {
+  return {
+    title,
+    description,
+    alternates: { canonical: path },
+    openGraph: {
+      ...openGraphBase,
+      title: `${title} | ${SITE_NAME}`,
+      description,
+      url: path,
+    },
+  };
+}

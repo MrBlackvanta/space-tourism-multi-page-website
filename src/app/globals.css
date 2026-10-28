@@ -83,4 +83,8 @@
   button:not(:disabled) {
     @apply cursor-pointer;
   }
+
+  :focus-visible {
+    @apply outline-2 outline-offset-4 outline-white;
+  }
 }
