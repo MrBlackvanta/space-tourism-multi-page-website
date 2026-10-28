@@ -1,0 +1,18 @@
+@import "tailwindcss";
+@source not "../../*.md";
+@source not "../**/*.test.ts";
+@source not "../**/*.test.tsx";
+@source not "../test";
+
+@theme {
+  --font-serif: var(--font-bellefair), ui-serif, Georgia, serif;
+  --font-sans: var(--font-barlow), ui-sans-serif, system-ui, sans-serif;
+  --font-condensed:
+    var(--font-barlow-condensed), ui-sans-serif, system-ui, sans-serif;
+}
+
+@layer base {
+  button:not(:disabled) {
+    @apply cursor-pointer;
+  }
+}
