@@ -1,5 +1,6 @@
-import { PageBackground } from "@/components/layout";
+import { InteriorPage, PageBackground } from "@/components/layout";
 import { pageMetadata } from "@/lib";
+import { CrewPicker } from "@/views/crew";
 
 const title = "Meet your crew";
 
@@ -14,7 +15,9 @@ export default function Crew() {
   return (
     <>
       <PageBackground page="crew" />
-      <h1>{title}</h1>
+      <InteriorPage number="02" title={title}>
+        <CrewPicker />
+      </InteriorPage>
     </>
   );
 }
