@@ -11,7 +11,7 @@ const variants: Record<
   { nav?: string; list: string; link: string }
 > = {
   header: {
-    nav: "h-full bg-white/5 backdrop-blur-2xl max-md:hidden md:ml-10 md:flex-1 md:px-10 lg:ml-0 lg:min-w-[calc(50%+1rem)] lg:flex-none lg:px-16",
+    nav: "h-full bg-white/5 backdrop-blur-2xl max-md:hidden md:ml-10 md:flex-1 md:px-10 lg:ml-0 lg:min-w-[calc(50%+1rem)] lg:flex-none lg:pr-[calc(max(0rem,50cqw-45rem)+4rem)] lg:pl-16",
     list: "flex h-full justify-end gap-12",
     link: "h-full items-center after:inset-x-0 after:bottom-0 after:h-0.75 after:scale-x-0 hover:after:scale-x-100 aria-[current=page]:after:scale-x-100",
   },

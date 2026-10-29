@@ -48,7 +48,7 @@ export default function RootLayout({
       lang="en"
       className={`${bellefair.variable} ${barlow.variable} ${barlowCondensed.variable} antialiased`}
     >
-      <body className="relative isolate grid min-h-dvh grid-rows-[auto_1fr]">
+      <body className="@container relative isolate grid min-h-dvh grid-rows-[auto_1fr]">
         <SiteHeader />
         <main className="grid">{children}</main>
         <Signature />
