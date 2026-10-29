@@ -14,7 +14,7 @@ export default function CrewPicker() {
           {...panelProps}
           className="grid gap-6 text-center lg:self-center lg:text-left"
         >
-          <h2 className="grid gap-2 font-serif uppercase md:gap-4">
+          <h2 className="grid gap-2 font-serif uppercase v-tab-title md:gap-4">
             <span className="text-preset-4-mobile text-white/52 md:text-preset-4-tablet lg:text-preset-4">
               {role}
             </span>{" "}
@@ -22,7 +22,7 @@ export default function CrewPicker() {
               {name}
             </span>
           </h2>
-          <div className="grid">
+          <div className="grid v-tab-copy">
             {crew.map((member, index) => (
               <p
                 key={member.name}
@@ -52,7 +52,7 @@ export default function CrewPicker() {
         </div>
       </div>
 
-      <div className="grid place-items-center md:-mb-10 md:items-start md:overflow-y-clip lg:mb-0 lg:grid-rows-1 lg:items-center lg:contain-size">
+      <div className="grid place-items-center v-tab-portrait md:-mb-10 md:items-start md:overflow-y-clip lg:mb-0 lg:grid-rows-1 lg:items-center lg:contain-size">
         {crew.map((member, index) => (
           <img
             key={member.name}

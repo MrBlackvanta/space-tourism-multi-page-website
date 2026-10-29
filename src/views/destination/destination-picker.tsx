@@ -15,7 +15,7 @@ export default function DestinationPicker() {
 
   return (
     <div className="grid content-start gap-8 md:grid-rows-[1fr_1fr] lg:grid-cols-2 lg:grid-rows-[1fr]">
-      <div className="grid place-items-center py-6.5 md:py-0">
+      <div className="grid place-items-center py-6.5 v-tab-planet md:py-0">
         {destinations.map((destination, index) => (
           <img
             key={destination.name}
@@ -24,7 +24,7 @@ export default function DestinationPicker() {
             height={destination.image.height}
             alt=""
             hidden={index !== selected}
-            className="w-37.5 md:w-75 lg:w-120"
+            className="w-37.5 motion-safe:animate-float md:w-75 lg:w-120"
           />
         ))}
       </div>
@@ -48,10 +48,10 @@ export default function DestinationPicker() {
         </div>
 
         <div {...panelProps} className="grid gap-4">
-          <h2 className="font-serif text-preset-2-mobile uppercase md:text-preset-2-tablet lg:text-preset-2">
+          <h2 className="font-serif text-preset-2-mobile uppercase v-tab-title md:text-preset-2-tablet lg:text-preset-2">
             {name}
           </h2>
-          <p className="text-preset-9-mobile text-muted md:text-preset-9-tablet lg:text-preset-9">
+          <p className="text-preset-9-mobile text-muted v-tab-copy md:text-preset-9-tablet lg:text-preset-9">
             {description}
           </p>
           <dl className="mt-2 grid gap-6 border-t border-white/25 pt-6 md:grid-cols-2 lg:mt-6 lg:pt-10">

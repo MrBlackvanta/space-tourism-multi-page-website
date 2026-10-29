@@ -3,7 +3,8 @@ import userEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vite-plus/test";
 import DestinationPicker from "./destination-picker";
 
-vi.mock("@/data", () => ({
+vi.mock("@/data", async (importOriginal) => ({
+  ...(await importOriginal<typeof import("@/data")>()),
   destinations: ["Moon", "Mars", "Titan"].map((name, index) => ({
     name,
     description: `${name} description`,

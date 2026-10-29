@@ -3,7 +3,8 @@ import userEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vite-plus/test";
 import CrewPicker from "./crew-picker";
 
-vi.mock("@/data", () => ({
+vi.mock("@/data", async (importOriginal) => ({
+  ...(await importOriginal<typeof import("@/data")>()),
   crew: [
     ["Commander", "Neil Armstrong"],
     ["Pilot", "Buzz Aldrin"],

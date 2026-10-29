@@ -1,3 +1,4 @@
+import { RouteTransitions } from "@/components/effects";
 import { Signature, SiteHeader } from "@/components/layout";
 import { SITE_NAME, SITE_URL } from "@/data";
 import { openGraphBase, twitterBase } from "@/lib";
@@ -52,6 +53,7 @@ export default function RootLayout({
         <SiteHeader />
         <main className="grid">{children}</main>
         <Signature />
+        <RouteTransitions />
       </body>
     </html>
   );

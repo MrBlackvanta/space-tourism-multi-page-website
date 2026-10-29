@@ -1,4 +1,6 @@
+import { runViewTransition } from "@/lib";
 import { type KeyboardEvent, useId, useState } from "react";
+import { flushSync } from "react-dom";
 
 type Orientation = "horizontal" | "vertical";
 type KeyTarget = (current: number, last: number) => number;
@@ -34,13 +36,21 @@ export function useTabs(
   const tabId = (index: number) => `${id}tab-${index}`;
   const panelId = `${id}panel`;
 
+  function select(next: number) {
+    if (next === selected) return;
+
+    runViewTransition("tab", next > selected ? "forward" : "back", () => {
+      flushSync(() => setSelected(next));
+    });
+  }
+
   function onKeyDown(event: KeyboardEvent) {
     const target = keyTargets[orientation][event.key];
     if (!target) return;
 
     event.preventDefault();
     const next = target(selected, count - 1);
-    setSelected(next);
+    select(next);
     document.getElementById(tabId(next))?.focus();
   }
 
@@ -57,7 +67,7 @@ export function useTabs(
       "aria-selected": index === selected,
       "aria-controls": panelId,
       tabIndex: index === selected ? 0 : -1,
-      onClick: () => setSelected(index),
+      onClick: () => select(index),
     }),
     panelProps: {
       id: panelId,

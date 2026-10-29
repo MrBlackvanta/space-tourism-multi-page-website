@@ -4,7 +4,7 @@ export default function PageBackground({ page }: { page: PageName }) {
   const { mobile, tablet, desktop } = backgrounds[page];
 
   return (
-    <picture className="absolute inset-0 -z-10">
+    <picture className="absolute inset-0 -z-10 overflow-clip">
       <source
         media="(min-width: 64rem)"
         srcSet={desktop.src}
@@ -23,7 +23,7 @@ export default function PageBackground({ page }: { page: PageName }) {
         height={mobile.height}
         alt=""
         fetchPriority="high"
-        className="size-full object-cover"
+        className="size-full object-cover motion-safe:animate-settle"
       />
     </picture>
   );

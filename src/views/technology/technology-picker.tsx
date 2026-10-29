@@ -14,7 +14,7 @@ export default function TechnologyPicker() {
 
   return (
     <div className="grid content-start gap-8 md:content-center lg:mr-[calc(50%-min(50cqw+2.5rem,45rem))] lg:grid-cols-[minmax(0,auto)_minmax(0,38rem)] lg:justify-between">
-      <div className="-mx-6 mt-16 grid md:-mx-10 lg:col-start-2 lg:row-start-1 lg:m-0 lg:self-center">
+      <div className="-mx-6 mt-16 grid v-tab-craft md:-mx-10 lg:col-start-2 lg:row-start-1 lg:m-0 lg:self-center">
         {technology.map(({ name, images }, index) => (
           <picture key={name} hidden={index !== selected}>
             <source
@@ -61,7 +61,7 @@ export default function TechnologyPicker() {
             <span className="text-preset-4-mobile text-white/50 md:text-preset-4-tablet lg:text-preset-4">
               The terminology…
             </span>{" "}
-            <span className="grid text-preset-3-mobile md:text-preset-3-tablet lg:text-preset-3">
+            <span className="grid text-preset-3-mobile v-tab-title md:text-preset-3-tablet lg:text-preset-3">
               {technology.map(({ name }, index) => (
                 <span
                   key={name}
@@ -73,7 +73,7 @@ export default function TechnologyPicker() {
               ))}
             </span>
           </h2>
-          <div className="grid">
+          <div className="grid v-tab-copy">
             {technology.map(({ name, description }, index) => (
               <p
                 key={name}

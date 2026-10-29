@@ -4,7 +4,8 @@ import userEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vite-plus/test";
 import TechnologyPicker from "./technology-picker";
 
-vi.mock("@/data", () => ({
+vi.mock("@/data", async (importOriginal) => ({
+  ...(await importOriginal<typeof import("@/data")>()),
   technology: ["Rocket", "Launch pad", "Lander"].map((name) => ({
     name,
     description: `${name} description`,
