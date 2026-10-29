@@ -62,7 +62,7 @@ export default function MobileMenu() {
         id="mobile-menu"
         aria-label="Menu"
         onClose={close}
-        className="size-full max-h-none max-w-none bg-transparent text-white transition-[display,overlay] transition-discrete duration-300 backdrop:bg-transparent motion-reduce:transition-none"
+        className="size-full max-h-none max-w-none overflow-clip bg-transparent text-white transition-[display,overlay] transition-discrete duration-300 backdrop:bg-transparent motion-reduce:transition-none"
       >
         <div
           className={`relative ml-auto h-full w-63.5 overflow-y-auto bg-night/15 pt-29.25 pl-8 backdrop-blur-2xl transition-transform duration-300 motion-reduce:transition-none starting:translate-x-full ${open ? "" : "translate-x-full"}`}

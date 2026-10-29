@@ -18,7 +18,7 @@ export default function HeroPage({
       <div className="mx-auto flex w-full max-w-277.5 flex-col items-center lg:flex-row lg:justify-between lg:self-end">
         <div className="grid gap-6 text-center md:max-w-lg lg:max-w-135 lg:text-left">
           <h1 className="grid gap-6 uppercase">
-            <span className="font-condensed text-preset-5-mobile text-muted md:text-preset-5">
+            <span className="font-condensed text-preset-5-mobile text-muted md:text-preset-5 lg:text-muted-light">
               {eyebrow}
             </span>{" "}
             <span className="font-serif text-preset-1-mobile md:text-preset-1">
