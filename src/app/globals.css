@@ -3,6 +3,7 @@
 @source not "../**/*.test.ts";
 @source not "../**/*.test.tsx";
 @source not "../test";
+@source not "../../lint";
 
 @theme {
   --font-serif: var(--font-bellefair), ui-serif, Georgia, serif;
