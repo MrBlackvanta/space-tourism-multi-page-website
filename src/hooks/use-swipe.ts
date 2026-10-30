@@ -1,6 +1,5 @@
+import { covers, type Point } from "@/lib";
 import { useEffect, useEffectEvent, useRef } from "react";
-
-type Point = { x: number; y: number };
 
 type SwipeHandlers = {
   onSwipeLeft: () => void;
@@ -11,13 +10,6 @@ const minDistance = 50;
 
 function pointOf({ clientX, clientY }: Touch): Point {
   return { x: clientX, y: clientY };
-}
-
-function covers(area: Element | null, { x, y }: Point) {
-  if (!area) return false;
-
-  const { left, right, top, bottom } = area.getBoundingClientRect();
-  return x >= left && x <= right && y >= top && y <= bottom;
 }
 
 export function useSwipe({ onSwipeLeft, onSwipeRight }: SwipeHandlers) {

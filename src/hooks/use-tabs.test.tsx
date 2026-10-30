@@ -131,6 +131,21 @@ describe("useTabs", () => {
     expect(selectedTab()).toHaveAccessibleName("Mars");
   });
 
+  it("selects the tab under a click that lands on <html>, as every click does mid view transition in Chrome", () => {
+    render(<Planets />);
+    vi.spyOn(
+      screen.getByRole("tab", { name: "Titan" }),
+      "getBoundingClientRect",
+    ).mockReturnValue(new DOMRect(200, 0, 100, 40));
+    const root = document.documentElement;
+
+    fireEvent.click(root, { clientX: 100, clientY: 20 });
+    expect(selectedTab()).toHaveAccessibleName("Moon");
+
+    fireEvent.click(root, { clientX: 250, clientY: 20 });
+    expect(selectedTab()).toHaveAccessibleName("Titan");
+  });
+
   it("ignores short swipes, vertical scrolls and pinches", () => {
     render(<Planets />);
     const panel = screen.getByRole("tabpanel");

@@ -1,5 +1,11 @@
-import { runViewTransition } from "@/lib";
-import { type KeyboardEvent, useId, useState } from "react";
+import { covers, type Point, runViewTransition } from "@/lib";
+import {
+  type KeyboardEvent,
+  useEffect,
+  useEffectEvent,
+  useId,
+  useState,
+} from "react";
 import { flushSync } from "react-dom";
 import { useSwipe } from "./use-swipe";
 
@@ -44,6 +50,25 @@ export function useTabs(
       flushSync(() => setSelected(next));
     });
   }
+
+  const selectTabAt = useEffectEvent((point: Point) => {
+    const tabs = Array.from({ length: count }, (_, index) =>
+      document.getElementById(tabId(index)),
+    );
+    const index = tabs.findIndex((tab) => covers(tab, point));
+    if (index >= 0) select(index);
+  });
+
+  useEffect(() => {
+    function onClickRetargetedToRoot({ target, clientX, clientY }: MouseEvent) {
+      if (target !== document.documentElement) return;
+
+      selectTabAt({ x: clientX, y: clientY });
+    }
+
+    document.addEventListener("click", onClickRetargetedToRoot);
+    return () => document.removeEventListener("click", onClickRetargetedToRoot);
+  }, []);
 
   const swipeProps = useSwipe({
     onSwipeLeft: () => select(Math.min(selected + 1, count - 1)),
