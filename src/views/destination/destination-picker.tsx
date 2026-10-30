@@ -4,7 +4,7 @@ import { destinations } from "@/data";
 import { useTabs } from "@/hooks";
 
 export default function DestinationPicker() {
-  const { selected, tabListProps, tabProps, panelProps } = useTabs(
+  const { selected, swipeProps, tabListProps, tabProps, panelProps } = useTabs(
     destinations.length,
   );
   const { name, description, distance, travelTime } = destinations[selected];
@@ -14,7 +14,10 @@ export default function DestinationPicker() {
   ];
 
   return (
-    <div className="grid content-start gap-8 md:grid-rows-[1fr_1fr] lg:grid-cols-2 lg:grid-rows-[1fr]">
+    <div
+      {...swipeProps}
+      className="grid content-start gap-8 md:grid-rows-[1fr_1fr] lg:grid-cols-2 lg:grid-rows-[1fr]"
+    >
       <div className="grid place-items-center py-6.5 v-tab-planet md:py-0">
         {destinations.map((destination, index) => (
           <img

@@ -1,3 +1,4 @@
+import { swipe } from "@/test/touch";
 import { render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vite-plus/test";
@@ -64,6 +65,15 @@ describe("CrewPicker", () => {
       "Michael Collins bio",
     );
     expect(visiblePortraits(container)).toEqual(["/Michael Collins.webp"]);
+  });
+
+  it("swipes to the next member from the portrait", () => {
+    const { container } = render(<CrewPicker />);
+
+    swipe(container.querySelector("img:not([hidden])")!, -80);
+
+    expect(selectedDot()).toHaveAccessibleName("Buzz Aldrin");
+    expect(visiblePortraits(container)).toEqual(["/Buzz Aldrin.webp"]);
   });
 
   it("tabs to the bio before the dots, matching the visual order", async () => {

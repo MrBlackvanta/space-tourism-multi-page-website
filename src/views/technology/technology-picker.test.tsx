@@ -1,4 +1,5 @@
 import { installMatchMedia, setMediaMatch } from "@/test/media";
+import { swipe } from "@/test/touch";
 import { act, render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vite-plus/test";
@@ -60,6 +61,17 @@ describe("TechnologyPicker", () => {
       "Lander description",
     );
     expect(visibleImages(container)).toEqual(["/Lander-landscape.webp"]);
+  });
+
+  it("swipes to the next term from the image", () => {
+    const { container } = render(<TechnologyPicker />);
+
+    swipe(container.querySelector("picture:not([hidden]) img")!, -80);
+
+    expect(screen.getByRole("tab", { selected: true })).toHaveAccessibleName(
+      "2 Launch pad",
+    );
+    expect(visibleImages(container)).toEqual(["/Launch pad-landscape.webp"]);
   });
 
   it("serves the portrait crop from desktop up", () => {

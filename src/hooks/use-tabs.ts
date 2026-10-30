@@ -1,6 +1,7 @@
 import { runViewTransition } from "@/lib";
 import { type KeyboardEvent, useId, useState } from "react";
 import { flushSync } from "react-dom";
+import { useSwipe } from "./use-swipe";
 
 type Orientation = "horizontal" | "vertical";
 type KeyTarget = (current: number, last: number) => number;
@@ -44,6 +45,11 @@ export function useTabs(
     });
   }
 
+  const swipeProps = useSwipe({
+    onSwipeLeft: () => select(Math.min(selected + 1, count - 1)),
+    onSwipeRight: () => select(Math.max(selected - 1, 0)),
+  });
+
   function onKeyDown(event: KeyboardEvent) {
     const target = keyTargets[orientation][event.key];
     if (!target) return;
@@ -56,6 +62,7 @@ export function useTabs(
 
   return {
     selected,
+    swipeProps,
     tabListProps: {
       role: "tablist",
       "aria-orientation": orientation,

@@ -4,11 +4,16 @@ import { crew } from "@/data";
 import { useTabs } from "@/hooks";
 
 export default function CrewPicker() {
-  const { selected, tabListProps, tabProps, panelProps } = useTabs(crew.length);
+  const { selected, swipeProps, tabListProps, tabProps, panelProps } = useTabs(
+    crew.length,
+  );
   const { name, role } = crew[selected];
 
   return (
-    <div className="grid grid-rows-[auto_1fr] gap-8 lg:grid-cols-2 lg:grid-rows-[1fr]">
+    <div
+      {...swipeProps}
+      className="grid grid-rows-[auto_1fr] gap-8 lg:grid-cols-2 lg:grid-rows-[1fr]"
+    >
       <div className="grid gap-6 pt-10 md:mx-auto md:max-w-lg lg:max-w-none lg:grid-rows-[1fr_auto] lg:gap-10 lg:pt-0 lg:pb-12">
         <div
           {...panelProps}

@@ -1,10 +1,11 @@
 import { setMediaMatch } from "@/test/media";
+import { swipe } from "@/test/touch";
 import {
   removeViewTransitions,
   rootDataset,
   stubViewTransitions,
 } from "@/test/view-transitions";
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { afterEach, describe, expect, it } from "vite-plus/test";
 import { useTabs } from "./use-tabs";
@@ -12,7 +13,7 @@ import { useTabs } from "./use-tabs";
 const planets = ["Moon", "Mars", "Titan"];
 
 function Planets() {
-  const { selected, tabListProps, tabProps, panelProps } = useTabs(
+  const { selected, swipeProps, tabListProps, tabProps, panelProps } = useTabs(
     planets.length,
   );
 
@@ -25,13 +26,19 @@ function Planets() {
           </button>
         ))}
       </div>
-      <p {...panelProps}>{planets[selected]}</p>
+      <p {...panelProps} {...swipeProps}>
+        {planets[selected]}
+      </p>
     </>
   );
 }
 
 function selectedTab() {
   return screen.getByRole("tab", { selected: true });
+}
+
+function swipePanel(dx: number, dy?: number) {
+  swipe(screen.getByRole("tabpanel"), dx, dy);
 }
 
 afterEach(removeViewTransitions);
@@ -76,6 +83,56 @@ describe("useTabs", () => {
     await Promise.resolve();
 
     expect(rootDataset()).toEqual({});
+  });
+
+  it("follows the finger: a swipe left goes forward, a swipe right goes back", () => {
+    const { started } = stubViewTransitions();
+    render(<Planets />);
+
+    swipePanel(-80);
+    expect(selectedTab()).toHaveAccessibleName("Mars");
+
+    swipePanel(80);
+    expect(selectedTab()).toHaveAccessibleName("Moon");
+
+    expect(started.map(({ dataset }) => dataset.direction)).toEqual([
+      "forward",
+      "back",
+    ]);
+  });
+
+  it("stops at both ends instead of wrapping on a swipe", () => {
+    const { start } = stubViewTransitions();
+    render(<Planets />);
+
+    swipePanel(80);
+    expect(selectedTab()).toHaveAccessibleName("Moon");
+    expect(start).not.toHaveBeenCalled();
+
+    swipePanel(-80);
+    swipePanel(-80);
+    swipePanel(-80);
+    expect(selectedTab()).toHaveAccessibleName("Titan");
+    expect(start).toHaveBeenCalledTimes(2);
+  });
+
+  it("ignores short swipes, vertical scrolls and pinches", () => {
+    render(<Planets />);
+    const panel = screen.getByRole("tabpanel");
+
+    swipePanel(-30);
+    swipePanel(-80, 120);
+    fireEvent.touchStart(panel, {
+      touches: [
+        { clientX: 200, clientY: 200 },
+        { clientX: 300, clientY: 200 },
+      ],
+    });
+    fireEvent.touchEnd(panel, {
+      changedTouches: [{ clientX: 100, clientY: 200 }],
+    });
+
+    expect(selectedTab()).toHaveAccessibleName("Moon");
   });
 
   it("switches at once when motion is reduced", async () => {

@@ -1,3 +1,4 @@
+import { swipe } from "@/test/touch";
 import { render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vite-plus/test";
@@ -51,6 +52,15 @@ describe("DestinationPicker", () => {
     expect(within(panel).getByText("Titan description")).toBeInTheDocument();
     expect(within(panel).getByText("3 km")).toBeInTheDocument();
     expect(visiblePlanets(container)).toEqual(["/Titan.webp"]);
+  });
+
+  it("swipes to the next destination from the planet", () => {
+    const { container } = render(<DestinationPicker />);
+
+    swipe(container.querySelector("img:not([hidden])")!, -80);
+
+    expect(selectedTab()).toHaveAccessibleName("Mars");
+    expect(visiblePlanets(container)).toEqual(["/Mars.webp"]);
   });
 
   it("keeps only the selected tab in the tab order", async () => {
