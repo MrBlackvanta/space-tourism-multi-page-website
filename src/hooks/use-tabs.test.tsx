@@ -7,7 +7,7 @@ import {
 } from "@/test/view-transitions";
 import { fireEvent, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { afterEach, describe, expect, it } from "vite-plus/test";
+import { afterEach, describe, expect, it, vi } from "vite-plus/test";
 import { useTabs } from "./use-tabs";
 
 const planets = ["Moon", "Mars", "Titan"];
@@ -26,9 +26,9 @@ function Planets() {
           </button>
         ))}
       </div>
-      <p {...panelProps} {...swipeProps}>
+      <div {...panelProps} {...swipeProps}>
         {planets[selected]}
-      </p>
+      </div>
     </>
   );
 }
@@ -114,6 +114,21 @@ describe("useTabs", () => {
     swipePanel(-80);
     expect(selectedTab()).toHaveAccessibleName("Titan");
     expect(start).toHaveBeenCalledTimes(2);
+  });
+
+  it("counts a swipe that starts over the panel but lands on <html>, as every touch does mid view transition in Chrome", () => {
+    render(<Planets />);
+    vi.spyOn(
+      screen.getByRole("tabpanel"),
+      "getBoundingClientRect",
+    ).mockReturnValue(new DOMRect(0, 100, 300, 200));
+    const root = document.documentElement;
+
+    swipe(root, -80, 0, { x: 150, y: 400 });
+    expect(selectedTab()).toHaveAccessibleName("Moon");
+
+    swipe(root, -80, 0, { x: 150, y: 200 });
+    expect(selectedTab()).toHaveAccessibleName("Mars");
   });
 
   it("ignores short swipes, vertical scrolls and pinches", () => {
